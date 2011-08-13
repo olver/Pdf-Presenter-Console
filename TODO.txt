@@ -1,0 +1,2 @@
+* Basic tablet annotation support
+* Forward/backwards by tapping on screen with finger
