@@ -105,7 +105,7 @@ namespace org.westhoffswelt.pdfpresenter.Metadata {
          * Open a given pdf document url and return a Poppler.Document for it.
          */
         protected Poppler.Document open_pdf_document( string url ) {
-            var file = File.new_for_uri( url );
+            var file = File.new_for_path( url );
             
             Poppler.Document document = null;
 
