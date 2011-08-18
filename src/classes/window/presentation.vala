@@ -44,7 +44,7 @@ namespace org.westhoffswelt.pdfpresenter.Window {
         /**
          * Base constructor instantiating a new presentation window
          */
-        public Presentation( string pdf_filename, int screen_num ) {
+        public Presentation( Metadata.Pdf pdf, int screen_num ) {
             base( screen_num );
 
             this.destroy.connect( (source) => {
@@ -60,8 +60,7 @@ namespace org.westhoffswelt.pdfpresenter.Window {
             
             Rectangle scale_rect;
             
-            this.view = View.Pdf.from_pdf_file( 
-                pdf_filename,
+            this.view = View.Pdf.from_pdf_metadata(pdf,
                 this.screen_geometry.width, 
                 this.screen_geometry.height,
                 out scale_rect
@@ -69,7 +68,7 @@ namespace org.westhoffswelt.pdfpresenter.Window {
 
             if ( !Options.disable_caching ) {
                 ((Renderer.Caching)this.view.get_renderer()).set_cache( 
-                    Renderer.Cache.OptionFactory.create( 
+                    Renderer.Cache.OptionFactory.create( // todo change to just pdf
                         this.view.get_renderer().get_metadata()
                     )
                 );

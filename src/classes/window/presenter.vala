@@ -75,7 +75,7 @@ namespace org.westhoffswelt.pdfpresenter.Window {
         /**
          * Base constructor instantiating a new presenter window
          */
-        public Presenter( string pdf_filename, int screen_num ) {
+        public Presenter( Metadata.Pdf pdf, int screen_num ) {
             base( screen_num );
 
             this.destroy.connect( (source) => {
@@ -103,8 +103,8 @@ namespace org.westhoffswelt.pdfpresenter.Window {
             int current_allocated_width = (int)Math.floor( 
                 this.screen_geometry.width * Options.current_size / (double)100 
             );
-            this.current_view = View.Pdf.from_pdf_file( 
-                pdf_filename,
+            this.current_view = View.Pdf.from_pdf_metadata( 
+                pdf,
                 current_allocated_width,
                 bottom_position,
                 out current_scale_rect
@@ -119,8 +119,8 @@ namespace org.westhoffswelt.pdfpresenter.Window {
             // remaining width
             Rectangle next_scale_rect;
             var next_allocated_width = this.screen_geometry.width - current_allocated_width;
-            this.next_view = View.Pdf.from_pdf_file( 
-                pdf_filename,
+            this.next_view = View.Pdf.from_pdf_metadata( 
+                pdf,
                 next_allocated_width,
                 bottom_position,
                 out next_scale_rect

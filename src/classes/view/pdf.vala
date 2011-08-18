@@ -70,6 +70,25 @@ namespace org.westhoffswelt.pdfpresenter {
             
             return new View.Pdf( renderer );
         }
+        
+		/**
+         * Use a Metadata object instead - seems weird to me to make multiple poppler document objects.
+         */
+        public static View.Pdf from_pdf_metadata( Metadata.Pdf metadata, int width, int height, out Rectangle scale_rect = null ) {
+            var scaler = new Scaler( 
+                metadata.get_page_width(),
+                metadata.get_page_height()
+            );
+            scale_rect = scaler.scale_to( width, height );
+            var renderer = new Renderer.Pdf( 
+                metadata,
+                scale_rect.width,
+                scale_rect.height
+            );
+            
+            return new View.Pdf( renderer );
+        }
+
 
         /**
          * Return the currently used Pdf renderer
